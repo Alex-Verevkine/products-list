@@ -1,4 +1,4 @@
-## Client Build Installing
+## Client Build
 
 This project was generated with [Angular CLI]
 
@@ -8,7 +8,7 @@ Run `npm i`
 
 Run `ng build` to build the project. The build artifacts will be stored in the `server/build` directory. Use the `--prod` flag for a production build.
 
-## Server Build Installing
+## Server Build
 
 `cd server`
 
