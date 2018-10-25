@@ -1,0 +1,32 @@
+<h1 mat-dialog-title>{{data.content.title}}</h1>
+<div mat-dialog-content>
+  <p>Name</p>
+  <mat-form-field>
+    <input maxlength="50" type="text" required matInput [(ngModel)]="data.targetObj.name" #name>
+    <mat-error *ngIf="!name.validity.valid">
+      Product name is required.
+    </mat-error>
+  </mat-form-field>
+  <p>Category</p>
+  <mat-form-field>
+    <mat-select [(ngModel)]="data.targetObj.category" required #category>
+      <mat-option *ngFor="let option of CATEGORIES" [value]="option">{{option}}</mat-option>
+    </mat-select>
+    <mat-error *ngIf="category.errorState">
+      Please select a category.
+    </mat-error>
+  </mat-form-field>
+  <p>Price</p>
+  <mat-form-field>
+    <input matInput type="number" min="1" required [(ngModel)]="data.targetObj.price" #price>
+    <mat-error *ngIf="!price.validity.valid">
+      Price must be greather than zero.
+    </mat-error>
+  </mat-form-field>
+
+</div>
+<div mat-dialog-actions>
+  <button color="secondary" mat-button mat-button (click)="onClose()">Close</button>
+  <button color="primary" [disabled]="!price.validity.valid || !name.validity.valid || category.errorState" mat-button
+    mat-button [mat-dialog-close]="onSave()">Save</button>
+</div>

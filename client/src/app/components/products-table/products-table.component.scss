@@ -1,0 +1,24 @@
+table {
+  width: 100%;
+}
+
+::ng-deep {
+  .mat-row {
+    cursor: pointer;
+  }
+  .mat-cell.delete-action {
+    display: flex;
+    justify-content: flex-end;
+  }
+  .mat-toolbar-single-row.table-toolbar {
+    padding: 0px;
+  }
+  .table-filter {
+    padding: 0px 16px;
+  }
+}
+
+.table-nav {
+  display: flex;
+  flex-direction: row;
+}

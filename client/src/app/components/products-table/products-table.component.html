@@ -1,0 +1,50 @@
+<mat-toolbar class="table-toolbar">
+  <button color="primary" mat-raised-button (click)='onAddProduct()'>Add New</button>
+
+  <mat-form-field class="table-filter">
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+  </mat-form-field>
+</mat-toolbar>
+
+
+<mat-table [dataSource]="dataSource" matSort (matSortChange)="onSortData($event)" class="mat-elevation-z8">
+  <!-- Position Column -->
+  <ng-container matColumnDef="name">
+    <mat-header-cell *matHeaderCellDef mat-sort-header="name"> Name </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="category">
+    <mat-header-cell *matHeaderCellDef mat-sort-header="category"> Category </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.category}} </mat-cell>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="price">
+    <mat-header-cell *matHeaderCellDef mat-sort-header="price"> Price </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.price}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="creationDate">
+    <mat-header-cell *matHeaderCellDef mat-sort-header="creationDate"> Created Date </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.createdAt | date: 'dd/MM/yyyy'}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="operations">
+    <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+    <mat-cell class="delete-action" *matCellDef="let element let i = index;"> <button mat-raised-button color="warn"
+        (click)="deleteProduct($event,i,element)">
+        <mat-icon>delete</mat-icon>
+      </button></mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="DISPLAYED_COLUMNS"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: DISPLAYED_COLUMNS;" (dblclick)="onEditProduct(row)">
+    <button mat-raised-button>Delete</button>
+  </mat-row>
+
+</mat-table>
+
+
+<mat-paginator #paginator *ngIf="!isLoading" [pageSize]="5" [pageIndex]="currPage" [length]="totalSize" (page)="handlePage($event)"></mat-paginator>
